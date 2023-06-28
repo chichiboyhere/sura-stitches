@@ -1,0 +1,174 @@
+{% extends 'store/layout.html' %}
+{% load static %}
+{% block content %}
+
+<style> 
+body{
+	background-color: hsl(0, 0%, 98%);
+}
+
+h1,h2,h3,h4,h5,h6{
+	color:hsl(0, 0%, 30%);
+}
+
+.box-element{
+	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.thumbnail{
+	width: 100%;
+	height: 200px;
+	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+}
+
+.product{
+	border-radius: 0 0 4px 4px;
+}
+
+.bg-dark{
+	background-color: #4f868c!important;
+}
+
+#cart-icon{
+	width:25px;
+	display: inline-block;
+	margin-left: 15px;
+}
+
+#cart-total{
+	display: block;
+	text-align: center;
+	color:#fff;
+	background-color: red;
+	width: 20px;
+	height: 25px;
+	border-radius: 50%;
+	font-size: 14px;
+}
+
+.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
+	margin-top: 10px;
+}
+
+.btn{
+	border-radius: 0;
+}
+
+.row-image{
+	width: 100px;
+}
+
+.form-field{
+	width:250px;
+	display: inline-block;
+	padding: 5px;
+}
+
+.cart-row, .mobila{
+	display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+
+}
+
+.quantity{
+	display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+	
+
+}
+
+.chg-quantity{
+	width: 12px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+
+.chg-quantity:hover{
+	opacity: .6;
+}
+
+
+.hidden{
+	display: none!important;
+}
+
+@media (max-width: 768px) {
+       /* .cart-row{
+        display: block;
+       } */
+        .cart-row p{
+            font-size: 12px;
+        }
+       
+        .mobila{
+            display: block;
+        }
+        
+}
+</style>
+<div class="container" style="margin-top: 150px; margin-bottom: 50px;">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="box-element">
+
+				<a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+
+				<br>
+				<br>
+				<table class="table">
+					<tr>
+						<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
+						<th><h5>Total:<strong> ${{order.get_cart_total|floatformat:2}}</strong></h5></th>
+						<th>
+							<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+						</th>
+					</tr>
+				</table>
+
+			</div>
+
+			<br>
+			<div class="box-element">
+				<div class="cart-row mobile-view">
+					<div class="mobila" style="flex:2"></div>
+					<div class="mobila" style="flex:2"><strong>Item</strong></div>
+					<div class="mobila" style="flex:1"><strong>Price</strong></div>
+					<div class="mobila" style="flex:1"><strong>Quantity</strong></div>
+					<div class="mobila" style="flex:1"><strong>Total</strong></div>
+				</div>
+				{% for item in items %}
+				<div class="cart-row">
+                    
+                        <div style="flex:2" class="mobile-thumbail"><img class="row-image" src="{{item.product.imageURL}}"></div>
+                        <div style="flex:2" class="mobile-thumbail"><p>{{item.product.name}} </p></div>
+                        
+                    
+					
+					<div style="flex:1"><p>${{item.product.price|floatformat:2}}</p></div>
+					<div style="flex:1">
+						<p class="quantity">{{item.quantity}}</p>
+						<div class="quantity">
+							<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+					
+							<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+						</div>
+					</div>
+					<div style="flex:1"><p>${{item.get_total}}</p></div>
+				</div>
+                {% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

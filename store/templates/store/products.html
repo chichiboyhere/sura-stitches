@@ -1,0 +1,65 @@
+{% extends 'store/layout.html' %}
+{% load static %}
+        {% block title %}
+            Products
+        {% endblock %}
+
+        {% block content %}
+
+            <header class="site-header section-padding d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-10 col-12">
+                            <h1>
+                                <span class="d-block text-primary">Choose your</span>
+                                <span class="d-block text-dark">favorite attires</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="products section-padding">
+                <div class="container">
+                    <div class="row">
+                        
+                        <div class="col-12">
+                            <h2 class="mb-5">New Arrivals</h2>
+                        </div>
+                        {% for product in products %}
+                        <div class="col-lg-4 col-12 mb-3">
+                            <div class="product-thumb">
+                                <a href="{% url 'product' product.id %}">
+                                    <img src="{{product.imageURL}}" class="img-fluid product-image" alt="">
+                                </a>
+
+                                <div class="product-top d-flex">
+                                    <span class="product-alert me-auto">New Arrival</span>
+
+                                    <a href="#" class="bi-heart-fill product-icon"></a>
+                                </div>
+
+                                <div class="product-info d-flex">
+                                    <div>
+                                        <h5 class="product-title mb-0">
+                                            <a href="{% url 'product' product.id %}" class="product-title-link">{{product.name}}</a>
+                                        </h5>
+
+                                        <p class="product-p">{{product.description|slice:":50" }}</p>
+                                    </div>
+
+                                    <small class="product-price text-muted ms-auto">&#8358;{{ product.price }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+
+                    </div>
+                </div>
+            </section>
+
+        {% endblock  %}
+
+        
