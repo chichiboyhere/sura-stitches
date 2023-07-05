@@ -1,0 +1,165 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Register</title>
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet">
+
+        <link rel="stylesheet" href="{% static 'css/slick.css' %}"/>
+
+        <link href="{% static 'css/tooplate-little-fashion.css' %}" rel="stylesheet">
+<!--
+
+Tooplate 2127 Little Fashion
+
+https://www.tooplate.com/view/2127-little-fashion
+
+-->
+
+<style>
+    .box-element{
+	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.form-field{
+	width:250px;
+	display: inline-block;
+	padding: 5px;
+}
+
+
+@media (max-width: 768px) {
+      
+        .box-element{
+            width: 100%;
+        }
+
+        .col-lg-6{
+            width: 95vw 
+        }
+        
+}
+</style>
+    </head>
+    
+    <body>  
+<div class="col-lg-6" style="margin: auto; margin-top: 150px; margin-bottom: 50px;">
+    
+        <div class="box-element" id="form-wrapper" style="background-color:rgb(243, 249, 247);">
+            {% if message %}
+            <div class="alert alert-danger"  style="display: flex; justify-content: center; align-items: center;">{{ message }}</div>
+            {% endif %} 
+            <h1 style="text-align: center; padding: 20px;">Register</h1>
+    
+            <form id="form" action="{% url 'register' %}" method="post" style="padding-bottom: 15px;">
+                {% csrf_token %}
+                <div id="user-info">
+                    <div class="form-field">
+                        <input required class="form-control" type="text" name="username" placeholder="Name..." >
+                    </div>
+                    
+                    <div class="form-field">
+                        <input required class="form-control" type="email" name="email" placeholder="Email...">
+                    </div>
+                    
+                </div>
+                <br>
+                <div id="user-info">
+                    <div class="form-field">
+                        <input required class="form-control" type="password" name="password" placeholder="Password..." >
+                    </div>
+                    
+                    <div class="form-field">
+                        <input required class="form-control" type="password" name="confirmation" placeholder="Confirm Password...">
+                    </div>
+                    
+                </div>
+                <br>
+                <hr>
+                <input style="width: 100%" id="form-button" class="btn btn-success btn-block" type="submit" value="Register">
+            </form>
+        </div>
+        <div class="box-element" style="margin-top: 16px; display: flex; justify-content: center; align-items: center; padding: 20px;">
+            Already have an account? <a href="{% url 'login' %}"> &nbsp; Log In here.</a>
+        </div>
+    </div>
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 col-10 me-auto mb-4">
+                <h4 class="text-white mb-3"><a href="{% url 'store' %}">Sura Stitches </a> </h4>
+                <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>Sura Stitches</strong></p>
+                <br>
+                <p class="copyright-text">Designed by <a href="#" target="_blank">Bloomer</a></p>
+            </div>
+
+            <div class="col-lg-5 col-8">
+                <h5 class="text-white mb-3">Sitemap</h5>
+
+                <ul class="footer-menu d-flex flex-wrap">
+                    <li class="footer-menu-item"><a href="about.html" class="footer-menu-link">Story</a></li>
+
+                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Products</a></li>
+
+                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Privacy policy</a></li>
+
+                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">FAQs</a></li>
+
+                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-4">
+                <h5 class="text-white mb-3">Social</h5>
+
+                <ul class="social-icon">
+
+                    <li><a href="https://www.youtube.com/watch?v=xBMOZ-77qwA" class="social-icon-link bi-youtube"></a></li>
+
+                    <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+
+                    <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                    <li><a href="#" class="social-icon-link bi-skype"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</footer>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
+ <!-- JAVASCRIPT FILES -->
+ <script src="{% static 'js/jquery.min.js' %}"></script>
+ <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+ <script src="{% static 'js/Headroom.js' %}"></script>
+ <script src="{% static 'js/jQuery.headroom.js' %}"></script>
+ <script src="{% static 'js/slick.min.js' %}"></script>
+ <script src="{% static 'js/custom.js' %}"></script>
+ <script src="{% static 'js/cart.js' %}"></script>
+
+</body>
+</html>

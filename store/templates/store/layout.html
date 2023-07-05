@@ -72,7 +72,27 @@ https://www.tooplate.com/view/2127-little-fashion
         color: #FF4400;
         }
 
+        .carter{
+            display: flex;
+            position: relative;
+        }
+        #cart-total{
+        /* position: absolute;
+        top: -5px;
+        right: -20px; */
+        display: block;
+        text-align: center;
+        color:#fff;
+        background-color: red;
+        width: 20px;
+        height: 25px;
+        border-radius: 50%;
+        font-size: 14px;
+        }
         #cart-icon{
+        /* position: absolute;
+        top:10px;
+        right: 8px; */
         width:25px;
         display: inline-block;
         margin-left: 15px;
@@ -152,13 +172,19 @@ https://www.tooplate.com/view/2127-little-fashion
                             <div class="fine">Stitches</div>
                         </div>
                     </a>
-
+                    {% if user.is_authenticated %}
                     <div class="d-lg-none">
-                        <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+                       
 
-                        <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                        <a href="{% url 'products' %}" class="bi-bag custom-icon"></a>
                     </div>
+                    {% else %}
+                    <div class="d-lg-none">
+                        <a href="{% url 'login' %}" class="bi-person custom-icon me-3"></a>
 
+                        <a href="{% url 'products' %}" class="bi-bag custom-icon"></a>
+                    </div>
+                    {% endif %}
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item {% active_link 'store' 'active' %}">
@@ -178,19 +204,28 @@ https://www.tooplate.com/view/2127-little-fashion
                             <li class="nav-item {% active_link 'contact' 'active' %}">
                                 <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                             </li>
-                            <li class="nav-item">
+                            <div class="carter">
+
+                                
                                 <a href="{% url 'cart' %}">
                                     <img  id="cart-icon" src="{% static 'images/cart.png' %}">
-                                   </a>
-                             <p id="cart-total">{{ cartItems }}</p>
-                            </li>
+                                </a>
+                                <p id="cart-total"> {{ cartItems }}</p>
+                            </div>
+                            
+                           
                         </ul>
-
-                        <div class="d-none d-lg-block">
-                            <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
-
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                        {% if user.is_authenticated %}
+                        <div > 
+                            <a href="{% url 'logout' %}" class="btn btn-warning">Logout</a>
                         </div>
+                        {% else %}
+                        <div class="d-none d-lg-block">
+                          
+                            <a href="{% url 'login' %}" class="bi-person custom-icon me-3"></a>
+                            <a href="{% url 'products' %}" class="bi-bag custom-icon"></a>
+                        </div>
+                        {% endif %} 
                     </div>
                 </div>
             </nav>

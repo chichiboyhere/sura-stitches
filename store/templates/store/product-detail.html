@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-   Sura Stitches- Product Detail
+   Sura Stitches- Product Detail {{product.id}}
 {% endblock %}
 
 {% block content %}
@@ -47,88 +47,114 @@
 
                     <p class="lead mb-5">{{product.description}}</p>
                 </div>
-
-                <div class="product-cart-thumb row">
-                    <div class="col-lg-6 col-12">
+                <form id="addToCartForm">
+                    <div class="product-cart-thumb row">
                         
-                        <select class="form-select cart-form-select" id="inputGroupSelect01">
-                            <option selected>Quantity</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
+                        <div class="col-lg-6 col-12">
+                            
+                            <select class="form-select cart-form-select" id="inputGroupSelect01">
+                                <option selected>Pick a size</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        
+                            
+                        </div>
 
-                     
+                        <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                            <button type="submit" data-product={{product.id}} data-action="addToCart" class="btn custom-btn cart-btn" id="addToCarter">Add to Cart</button>
+
+                        </div>
+                    
+                        <p>
+                            <a href="#" class="product-additional-link">Details</a>
+
+                            <a href="#" class="product-additional-link">Delivery and Payment</a>
+                        </p>
                     </div>
-
-                    <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-                        <button type="submit" data-product={{product.id}} data-action="add" class="btn custom-btn cart-btn update-cart" data-bs-toggle="modal" data-bs-target="#cart-modal">Add to Cart</button>
-
-                    </div>
-
-                    <p>
-                        <a href="#" class="product-additional-link">Details</a>
-
-                        <a href="#" class="product-additional-link">Delivery and Payment</a>
-                    </p>
-                </div>
-
+                </form>
             </div>
 
         </div>
     </div>
 </section>
-<!-- CART MODAL -->
-<div class="modal fade" id="cart-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content border-0">
-            <div class="modal-header flex-column">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+<script>
+    // Prevent form submission 
+    var form = document.getElementById('addToCartForm')
+		form.addEventListener('submit', function(event){
+          event.preventDefault()
+		  console.log('product added to cart')
+		})
 
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-                        <img src="{{product.imageURL}}" class="img-fluid product-image" alt="">
-                    </div>
+       
+    
+    // Add event listener to 'addTocarter' button (fetch product-id,) and extract chosen size
+    var addProductToCart = document.getElementById('addToCarter');
 
-                    <div class="col-lg-6 col-12 mt-3 mt-lg-0">
-                        <h3 class="modal-title" id="exampleModalLabel">{{product.name}}</h3>
+    addProductToCart.addEventListener('click', function(){
+        var productId = this.dataset.product;
+        var action = this.dataset.action;
+        var size = document.getElementById("inputGroupSelect01").value
 
-                        <p class="product-price text-muted mt-3">&#8358;{{ product.price }}</p>
+        console.log('productId:', productId, 'action:', action, 'size:', size)
+        
+       if (user == 'AnonymousUser'){
+         addToCartCookie(productId, action, size)
+       }
+       else{
+        addToUserCart(productId, size)
+       }
+    })
 
-                        <p class="product-p">Quatity: <span class="ms-1">1</span></p>
+    // Update cart (add item to it, plus its size or increase the quantity of item if already there by one )
+    function addToCartCookie(productId, action, size){
+        console.log('Not logged in....')
+        if (action == "addToCart"){
+         
+           
+            if (cart[productId] == undefined){
+                cart[productId] = {'quantity': 1}
+                cart[productId] = {'size': size}
+            }else{
+                cart[productId]['quantity'] += 1
+            }
+            console.log(cart)
+        }
+        console.log('Cart ', cart)
+        document.cookie = 'cart='+ JSON.stringify(cart) + ";domain=;path=/"
+        location.reload()
+    }
 
-                        
+    // route te JSON data to the backend through the url - 'intialAddToCart'
+    function addToUserCart(productId, size){
+        console.log('user is logged in, send am some data');
+        
+        var url = '/intialAddToCart/'
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({'productId': productId,  'size': size})
+        })
+        .then((response) =>{
+            return response.json()
+        })
+        .then((data) =>{
+            console.log('data:', data)
+           location.reload()
+        })
+    }
+    
+    
+    
+</script>
 
-                        <p class="product-p pb-3">Size: <span class="ms-1">10</span></p>
 
-                        <div class="border-top mt-4 pt-3">
-                            <p class="product-p"><strong>Total: <span class="ms-1">&#8358;{{ product.price }}</span></strong></p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <div class="row w-50">
-                    <a href="{% url 'products' %}">
-                        <button type="button" class="btn custom-btn cart-btn ms-lg-4">Keep Shopping</button>
-                    </a>
-                </div>
-                <div class="row w-50">
-                    <a href="{% url 'cart' %}">
-                        <button type="button" class="btn custom-btn cart-btn ms-lg-4">View Cart</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
   
 {% endblock %}
 

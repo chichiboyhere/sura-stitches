@@ -8,7 +8,7 @@ def cookieCart (request):
         cart = {}
     print('Cart: ', cart)
     items=[]
-    order={'get_cart_total':0, 'get_cart_items':0,}
+    order={'get_cart_total':0, 'get_cart_items':0,} # order object created 
     cartItems = order['get_cart_items']
 
     for i in cart:
@@ -27,12 +27,12 @@ def cookieCart (request):
                     'imageURL': product.imageURL
                 },
                 'quantity':cart[i]["quantity"],
+                'size': cart[i]["size"],
                 'get_total':total,
+                
             }
             items.append(item)
 
-            # if product.digital == False:
-            #     order['shipping'] = True
         except:
             pass
     return {'cartItems': cartItems, 'order': order, 'items': items}
@@ -72,6 +72,7 @@ def guestOrder (request, data):
         orderItem = OrderItem.objects.create(
             product=product,
             order=order,
-            quantity=item['quantity']
+            quantity=item['quantity'],
+            size=item['size']
         )
     return customer, order  
