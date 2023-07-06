@@ -41,7 +41,7 @@ def cart(request):
 	data = cartData(request)
 	cartItems=data['cartItems']       # total number of items order
 	order= data['order']              # a customer's order
-	items = data['items']             # orderItems
+	items = data['items']             # orderItems(products ordered, their quantity, size)
 	context={"items": items, "order": order, "cartItems": cartItems, 'shipping':False}
 	return render(request, 'store/cart.html', context )
 
