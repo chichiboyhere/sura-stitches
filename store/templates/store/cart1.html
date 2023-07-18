@@ -1,0 +1,253 @@
+{% extends 'store/layout.html' %}
+{% load static %}
+{% block content %}
+
+<style> 
+
+
+.box-element{
+	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.product{
+	border-radius: 0 0 4px 4px;
+}
+
+
+
+#cart-icon{
+	width:25px;
+	display: inline-block;
+	margin-left: 15px;
+}
+
+#cart-total{
+	display: block;
+	text-align: center;
+	color:#fff;
+	background-color: red;
+	width: 20px;
+	height: 25px;
+	border-radius: 50%;
+	font-size: 14px;
+}
+
+.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
+	margin-top: 10px;
+}
+
+.btn{
+	border-radius: 0;
+}
+
+.row-image{
+	width: 100px;
+}
+
+
+.cart-row{
+	/* display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec; */
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5rem;
+	margin: 1rem 0;
+	border-bottom: 1px solid #ececec;
+   
+}
+.cart_header{
+	display: none;
+}
+
+.col_display{
+	display: flex;
+    flex-direction: column;
+	gap: 1rem;
+	justify-content:center;
+	align-items: center;
+	
+}
+
+.quantity{
+	display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+	
+}
+
+.chg-quantity{
+	width: 12px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+} 
+
+.chg-quantity:hover{
+	opacity: .6;
+}
+
+
+.hidden{
+	display: none!important;
+}
+.describe{
+			display: inline-block;
+		}
+
+.cart_item_price > .cart_item__price {
+	display:flex;
+	align-items: center;
+	justify-content: center; 
+	padding: 10px;
+	/* margin: auto 0; */
+}
+.cart-content{
+  
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	 /* display: flex;
+    flex-direction: column;  */
+}
+.item_cell{
+	font-size: 1rem;
+        font-weight: bold;
+        color: white;
+        background-color: #40005d;
+        border: 1px solid white;
+        padding: 0.5rem;
+        border-radius: 12px;
+		margin: 2px;
+}
+@media (min-width: 580px) {
+       .cart-row{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       }
+        .cart-row p{
+            font-size: 12px;
+        }
+       
+        .mobile-view{
+            display: none;
+        }
+        
+        .box-element{
+            width: 100%;
+        }
+        .qty{
+            display: none;
+        }
+        .flota{
+            float: right;
+        }
+		.cart-table{
+			display: block
+		}
+		.cart_header{
+			display: flex
+		}
+
+		.col_display{
+		flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+		font-size: 10px;
+		}
+        
+		
+		.describe{
+			display: none;
+		}
+		.cart-content{
+			display: flex;
+		}
+}
+</style>
+
+<div class="container" style="margin-top: 150px; margin-bottom: 50px;  width: fit-content;">
+	<div class="row">
+		<div class="col-lg-12" style=" width: 100vw;">
+			<div class="box-element">
+                <!-- added next line col-10 me-auto mb-4   * col-8 * col-4-->
+                <div class="row">
+                <div class="col-md-4 " >
+                    <a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+
+                    <br>
+                    <br>
+                    <h5>Items: <strong>{{order.get_cart_items}}</strong></h5>
+                </div>
+                <div class="col-md-4"  style="margin-top: 20px;">
+                    <h5>Total:<strong> ${{order.get_cart_total|floatformat:2}}</strong></h5>
+                </div>
+                <div class="col-md-4 " style="margin-top: 20px;">
+                    <a  class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+                </div>
+            </div>
+				
+
+			</div>
+
+			<br>
+			<div class="box-element cart-table">
+			
+				<div class="cart_header cart-row">
+					<div style="flex:2"></div>
+					<div style="flex:1"><strong>Item</strong></div>
+					<div style="flex:1"><strong>Size</strong></div>
+					<div style="flex:1"><strong>Price</strong></div>
+					<div style="flex:1"><strong>Quantity</strong></div>
+					<div style="flex:1"><strong>Total</strong></div>
+				</div>
+				{% for item in items %}
+				<div class="cart-content">
+				<div class="cart-row">
+					<div class="col_diplay">
+						 <!-- item image-->
+						 <div><img class="row-image" src="{{item.product.imageURL}}">
+						 </div>
+						 <!-- item name (Item) -->
+						 <div >{{item.product.name}} </div>
+					</div>
+					<div class="col_display">
+						 <!-- item size -->
+						 <div ><div class="describe">Size: </div>{{item.size}} </div>
+						 <!-- item price -->
+						 <div ><div class="describe">Price: </div>${{item.product.price|floatformat:2}}</div>
+						 <!-- item quantity -->
+						<div >
+							<div class="describe">Qty:</div>{{item.quantity}}
+						</div>
+					</div>
+					<div class="col_display">
+						<div>	
+							<div class="quantity flota">
+								<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+						
+								<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+							</div>
+						</div>
+					</div>		
+				</div>
+				<div class="cart_item_price">
+                      <!-- item total cost -->
+					    <div class="cart_item__price">Item Total: ${{item.get_total}}</div>
+				</div>
+				<hr>
+			   </div>
+                {% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

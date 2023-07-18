@@ -8,7 +8,7 @@
             <section class="slick-slideshow">   
                 <div class="slick-custom">
                     
-                    <img src="{% static 'images/slideshow/african-attire.jpg' %}" class="img-fluid" alt="">
+                    <img src="{% static 'images/slideshow/african-attire.jpg' %}" class="img-fluid" alt="pic of a sweet lady well-styled">
 
                     <div class="slick-bottom">
                         <div class="container">
@@ -16,7 +16,7 @@
                                 <div class="col-lg-6 col-10">
                                     <h1 class="slick-title">Cool Fashion</h1>
 
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">Little fashion template comes with total 8 HTML pages provided by Tooplate website.</p>
+                                    <p class="lead text-white mt-lg-3 mb-lg-5">Sura Stitches is a mega fashion outfit with Nigerian roots.</p>
 
                                     <a href="{% url 'ourStory' %}" class="btn custom-btn">Learn more about us</a>
                                 </div>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="slick-custom">
-                    <img src="{% static 'images/slideshow/african-family-cropped.jpg' %}" class="img-fluid" alt="">
+                    <img src="{% static 'images/slideshow/african-family-cropped.jpg' %}" class="img-fluid" alt="pic of a well-adorned African family">
 
                     <div class="slick-bottom">
                         <div class="container">
@@ -34,9 +34,10 @@
                                 <div class="col-lg-6 col-10">
                                     <h1 class="slick-title">New Design</h1>
 
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">Please share this Little Fashion template to your friends. Thank you for supporting us.</p>
+                                    <p class="lead text-white mt-lg-3 mb-lg-5">With creative and innovative fashion designers and expert tailors and seamstresses, we stay ahead of the African fashion world.
+                                    </p>
 
-                                    <a href="product.html" class="btn custom-btn">Explore products</a>
+                                    <a href="{% url 'products' %}" class="btn custom-btn">Explore products</a>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +45,7 @@
                 </div>
 
                 <div class="slick-custom">
-                    <img src="{% static 'images/slideshow/men-attire-cropped.jpg' %}" class="img-fluid" alt="">
+                    <img src="{% static 'images/slideshow/men-attire-cropped.jpg' %}" class="img-fluid" alt="pic of a man in a fashionable African attire">
 
                     <div class="slick-bottom">
                         <div class="container">
@@ -52,9 +53,9 @@
                                 <div class="col-lg-6 col-10">
                                     <h1 class="slick-title">Talk to us</h1>
 
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">Tooplate is one of the best HTML CSS template websites for everyone.</p>
+                                    <p class="lead text-white mt-lg-3 mb-lg-5">Whether you have a fashion idea  for your own self or for the entire family, we are here to serve you. </p>
 
-                                    <a href="contact.html" class="btn custom-btn">Work with us</a>
+                                    <a href="{% url 'contact' %}" class="btn custom-btn">Work with us</a>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +69,7 @@
                     <div class="row">
 
                         <div class="col-12 text-center">
-                            <h2 class="mb-5">Get started with <span>Sura</span>Stitches</h2>
+                            <h2 class="mb-5">Get started with <span>Sura</span> Stitches</h2>
                         </div>
 
                         <div class="col-lg-2 col-12 mt-auto mb-auto">
@@ -93,19 +94,21 @@
 
                                     <div class="row">
                                         <div class="col-lg-7 col-12">
-                                            <img src="{% static 'images/african-attire7-cropped.jpg' %}" class="img-fluid" alt="">
+                                            <img src="{% static 'images/african_family.jpg' %}" class="img-fluid" alt="">
                                         </div>
 
                                         <div class="col-lg-5 col-12">
                                             <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
                                                 <h4 class="mb-3">Good <span>Design</span> <br>Ideas for <span>your</span> fashion</h4>
 
-                                                <p>Little Fashion templates comes with <a href="sign-in.html">sign in</a> / <a href="sign-up.html">sign up</a> pages, product listing / product detail, about, FAQs, and contact page.</p>
+                                                <p>Sura Stitches uses nothing but the very best fabric to make clothes that are not only fashionable but very comfortable. We've  got the right style for the entire family. </p>
+                                                <p>
+                                                    Check out our <a href="{% url 'products' %}" style="color: red">store</a> to get a style that suits you. Or <a href="{% url 'contact' %}"  style="color: red">contact us</a> for a custom made attire.
+                                                </p>
 
-                                                <p>Since this HTML template is based on Boostrap 5 CSS library, you can feel free to add more components as you need.</p>
 
                                                 <div class="mt-2 mt-lg-auto">
-                                                    <a href="about.html" class="custom-link mb-2">
+                                                    <a href="{% url 'ourStory' %}" class="custom-link mb-2">
                                                         Learn more about us
                                                         <i class="bi-arrow-right ms-2"></i>
                                                     </a>
@@ -120,20 +123,27 @@
                                     <div class="row">
                                         <div class="col-lg-7 col-12">
                                             <div class="ratio ratio-16x9">
-                                                <iframe src="https://www.youtube-nocookie.com/embed/f_7JqPDWhfw?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                <video src="{% static 'images/sura.mp4' %}" width="320" height="240" controls>
+                                                    <source src="movie.mp4" type="video/mp4">
+                                                    <source src="movie.ogg" type="video/ogg">
+                                                    Your browser does not support the video tag.
+                                                </video>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-5 col-12">
                                             <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
-                                                <h4 class="mb-3">Life at Studio</h4>
+                                                <h4 class="mb-3">Magic Fingers </h4>
 
-                                                <p>Over three years in business, We’ve had the chance to work on a variety of projects, with companies</p>
+                                              
+                                                <p>
+                                                    Over the past five years, Sura Stitches has worked with very skilled fashion designers, tailors and seamstresses to make top quality and stylish traditional attires.
+                                                </p>
 
-                                                <p>Custom work is branding, web design, UI/UX design</p>
+                                                <p>We've styled people from all walks of life &dash; from celebrities to professionals; from politicians to students. We've got the style for everyone!</p>
 
                                                 <div class="mt-2 mt-lg-auto">
-                                                    <a href="contact.html" class="custom-link mb-2">
+                                                    <a href="{% url 'contact' %}" class="custom-link mb-2">
                                                         Work with us
                                                         <i class="bi-arrow-right ms-2"></i>
                                                     </a>
@@ -146,18 +156,18 @@
                                 <div class="tab-pane fade" id="pills-skill" role="tabpanel" aria-labelledby="pills-skill-tab">
                                     <div class="row">
                                         <div class="col-lg-7 col-12">
-                                            <img src="{% static 'images/afc5.jpg' %}" class="img-fluid" alt="">
+                                            <img src="{% static 'images/african_women.jpg' %}" class="img-fluid" alt="">
                                         </div>
 
                                         <div class="col-lg-5 col-12">
                                             <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
                                                 <h4 class="mb-3">What can help you?</h4>
 
-                                                <p>Over three years in business, We’ve had the chance on projects</p>
+                                                <p>Over five years in business, We’ve had the chance on projects</p>
 
                                                 <div class="skill-thumb mt-3">
 
-                                                    <strong>Branding</strong>
+                                                    <strong>Customer Satisfaction</strong>
                                                         <span class="float-end">90%</span>
                                                             <div class="progress">
                                                                 <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
@@ -206,9 +216,9 @@
                         <div class="col-lg-6 col-12">
                             <div class="px-5 py-5 py-lg-0">
                                 
-                                <h2 class="mb-4"><span>Retail</span> shop owners</h2>
+                                <h2 class="mb-4"><span>We're </span> available 24/7</h2>
 
-                                <p class="lead mb-4">Credits go to Unsplash and FreePik websites for images used in this Little Fashion by Tooplate.</p>
+                                <p class="lead mb-4">Our innovative staff span the length and breadth of Nigeria. We are at your service 24/7 </p>
 
                                 <a href="{% url 'products' %}" class="custom-link">
                                     Explore Products
@@ -244,13 +254,13 @@
                                 <div class="product-info d-flex">
                                     <div>
                                         <h5 class="product-title mb-0">
-                                            <a href="product-detail.html" class="product-title-link">Tree pot</a>
+                                            <a href="product-detail.html" class="product-title-link">Lady Africa</a>
                                         </h5>
 
-                                        <p class="product-p">Original package design from house</p>
+                                        <p class="product-p">A fast-selling Ankara gown</p>
                                     </div>
 
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">&#8358;25</small>
+                                    <small class="product-price text-muted ms-auto mt-auto mb-5">$115</small>
                                 </div>
                             </div>
                         </div>
@@ -270,13 +280,13 @@
                                 <div class="product-info d-flex">
                                     <div>
                                         <h5 class="product-title mb-0">
-                                            <a href="product-detail.html" class="product-title-link">Fashion Set</a>
+                                            <a href="product-detail.html" class="product-title-link">African Alpha</a>
                                         </h5>
 
-                                        <p class="product-p">Costume Package</p>
+                                        <p class="product-p">Quality Men fashion statement</p>
                                     </div>
 
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">&#8358;35</small>
+                                    <small class="product-price text-muted ms-auto mt-auto mb-5">$100</small>
                                 </div>
                             </div>
                         </div>
@@ -294,13 +304,13 @@
                                 <div class="product-info d-flex">
                                     <div>
                                         <h5 class="product-title mb-0">
-                                            <a href="product-detail.html" class="product-title-link">Juice Drinks</a>
+                                            <a href="product-detail.html" class="product-title-link">Queenly Ma</a>
                                         </h5>
 
-                                        <p class="product-p">Nature made another world</p>
+                                        <p class="product-p">A grand style in women fashion</p>
                                     </div>
 
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">&#8358;45</small>
+                                    <small class="product-price text-muted ms-auto mt-auto mb-5">$135</small>
                                 </div>
                             </div>
                         </div>

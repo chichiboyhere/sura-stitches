@@ -38,7 +38,7 @@
                         <p class="product-p">Original package design from house</p>
                     </div>
 
-                    <small class="product-price text-muted ms-auto mt-auto mb-5">&#8358;{{ product.price }}</small>
+                    <small class="product-price text-muted ms-auto mt-auto mb-5">${{ product.price }}</small>
                 </div>
 
                 <div class="product-description">
@@ -52,7 +52,7 @@
                         
                         <div class="col-lg-6 col-12">
                             
-                            <select class="form-select cart-form-select" id="inputGroupSelect01">
+                            <select  class="form-select cart-form-select" id="inputGroupSelect01">
                                 <option selected>Pick a size</option>
                                 <option value="10">10</option>
                                 <option value="12">12</option>
@@ -70,11 +70,12 @@
                         </div>
                     
                         <p>
-                            <a href="#" class="product-additional-link">Details</a>
+                            <a href="{% url 'cart' %}" class="product-additional-link">Details</a>
 
-                            <a href="#" class="product-additional-link">Delivery and Payment</a>
+                            <a href="{% url 'checkout' %}" class="product-additional-link">Delivery and Payment</a>
                         </p>
                     </div>
+                    
                 </form>
             </div>
 
@@ -95,10 +96,11 @@
     var addProductToCart = document.getElementById('addToCarter');
 
     addProductToCart.addEventListener('click', function(){
+        
         var productId = this.dataset.product;
         var action = this.dataset.action;
         var size = document.getElementById("inputGroupSelect01").value
-
+        
         console.log('productId:', productId, 'action:', action, 'size:', size)
         
        if (user == 'AnonymousUser'){
@@ -113,8 +115,7 @@
     function addToCartCookie(productId, action, size){
         console.log('Not logged in....')
         if (action == "addToCart"){
-         
-           
+            
             if (cart[productId] == undefined){
                 cart[productId] = {'quantity': 1}
                 cart[productId]['size'] = size
