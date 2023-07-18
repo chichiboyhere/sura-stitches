@@ -18,8 +18,7 @@ from django.views.decorators.http import require_http_methods
 def store(request):
     data = cartData(request)
     cartItems = data['cartItems']
-    products = Product.objects.all()
-    context = {"products": products, "cartItems": cartItems}
+    context = {"cartItems": cartItems}
     return render(request, "store/store.html", context)
 
 def products(request):
@@ -174,10 +173,16 @@ def register(request):
 
 
 def ourStory(request):
-    return render(request, "store/products.html")
+    data = cartData(request)
+    cartItems = data['cartItems']
+    context = {"cartItems": cartItems}
+    return render(request, "store/ourStory.html", context)
 
 def contact(request):
-    return render(request, "store/products.html")
+    data = cartData(request)
+    cartItems = data['cartItems']
+    context = {"cartItems": cartItems}
+    return render(request, "store/contact.html", context)
 
   
     
