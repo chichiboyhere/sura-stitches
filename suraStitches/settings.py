@@ -126,7 +126,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = '/var/www/bloomer/static'
+STATIC_ROOT = '/var/www/surastitches/static'
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT= os.path.join(BASE_DIR, 'static/images')
