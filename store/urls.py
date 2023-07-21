@@ -14,5 +14,6 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("ourStory/", views.ourStory, name="ourStory"),
     path("contact/", views.contact, name="contact"),
-    path('intialAddToCart/', views.intialAddToCart, name="intialAddToCart")
+    path('intialAddToCart/', views.intialAddToCart, name="intialAddToCart"),
+    path('contact-message/', views.contactMessage , name="contactMessage")
 ]

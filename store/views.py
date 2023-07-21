@@ -184,5 +184,25 @@ def contact(request):
     context = {"cartItems": cartItems}
     return render(request, "store/contact.html", context)
 
-  
+def contactMessage(request):
+    data = json.loads(request.body)
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        name = customer.name
+        email = customer.email
+        subject = data['form']['subject']
+        message = data['form']['message']
+    else:
+        name = data['form']['name']
+        email = data['form']['email']
+        subject = data['form']['subject']
+        message = data['form']['message']
+    ContactMessage.objects.create(
+          name=name,
+          email=email,
+          subject=subject,
+          message=message
+    )
+    return JsonResponse('message received', safe=False)
+	
     

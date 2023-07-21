@@ -30,20 +30,21 @@ Contact
             <div class="col-lg-6 col-12">
                 <h2 class="mb-4">Let's <span>begin</span></h2>
 
-                <form class="contact-form me-lg-5 pe-lg-3" role="form">
+                <form id = "form" class="contact-form me-lg-5 pe-lg-3" role="form">
 
-                    <div class="form-floating">
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Full name" required>
+                    <div id="user-info">
+                        <div class="form-floating">
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Full name" required>
 
-                        <label for="name">Full name</label>
+                            <label for="name">Full name </label>
+                        </div>
+
+                        <div class="form-floating my-4">
+                            <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required>
+
+                            <label for="email">Email address</label>
+                        </div>
                     </div>
-
-                    <div class="form-floating my-4">
-                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required>
-
-                        <label for="email">Email address</label>
-                    </div>
-                    
                     <div class="form-floating my-4">
                         <input type="subject" name="subject" id="subject"class="form-control" placeholder="Subject" required>
 
@@ -110,4 +111,53 @@ Contact
     </div>
 </section>
 </main>
+<script>
+       if ( user != 'AnonymousUser'){
+			document.getElementById('user-info').innerHTML= ""
+		}
+		
+		var form = document.getElementById('form')
+		form.addEventListener('submit', function(event){
+          event.preventDefault()
+		  submitFormData();
+		})
+        
+		
+		function submitFormData(){
+			console.log("Payment button clicked");
+			var userFormData = {
+				'name': null,
+				'email': null,
+				'subject': form.subject.value,
+                'message': form.message.value
+			}
+		
+			if (user == 'AnonymousUser'){
+				userFormData.name = form.name.value
+				userFormData.email = form.email.value
+				
+			}
+
+			var url = '/contact-message/'
+		
+			fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': csrftoken,
+				},
+				body: JSON.stringify({'form':userFormData})
+			})
+			.then((response) => response.json())
+			.then((data) =>{
+				console.log('Success:', data);
+				alert('We have received your message. We shall respond accordingly. Thanks!');
+                form.name.value=""
+                form.email.value=""
+                form.subject.value=""
+                form.message.value=""
+			})
+            
+		}
+</script>
 {% endblock %}

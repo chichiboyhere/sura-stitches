@@ -15,7 +15,6 @@ class Customer(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
-    countInStock = models.IntegerField(null=True, blank=True, default=0)
     image = models.ImageField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     def __str__(self):
@@ -78,3 +77,9 @@ class ShippingAddress(models.Model):
    
     def __str__(self):
         return self.address
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=64, null=True)
+    email= models.CharField(max_length=88)
+    subject = models.CharField(max_length=64)
+    message = models.TextField()

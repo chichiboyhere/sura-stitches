@@ -49,6 +49,7 @@
         }
        }
     </style>
+	
     <div class="container" style="margin-top: 150px; margin-bottom: 50px;">
      <div class="row">
 		<div class="col-lg-6">
@@ -93,7 +94,6 @@
 			<div class="box-element hidden" id="payment-info">
 				<small>Paypal Options</small>
 				<div id="paypal-button-container"></div>
-				<!-- <button id="make-payment">Make Payment</button> -->
 			</div>
 			
 		</div>
@@ -121,6 +121,7 @@
 		</div>
 	</div>
    </div>
+
 	<script src="https://www.paypal.com/sdk/js?client-id=AZn17OkmaViR_Bu--k5fgxredm_Wq-ubUuUiNmzGJ0wSPwvtpfGv5vGAwN4RaNlDBuPnUpx2ygtKfkyZ&currency=USD"></script>
 	<!-- the disable button begins after the USD  => &disable-funding=credit   -->
 	<script>
@@ -150,7 +151,6 @@
 			onApprove: function(data, actions){
 				return actions.order.capture().then(function(details) {
 					// show a success payment to the buyer
-					// alert('Transaction completed by ' + details.payer.name.given_name + '|');
 					submitFormData()
 				});
 			}
@@ -159,6 +159,7 @@
 
         }).render('#paypal-button-container');
     </script>
+
 	<script>
 		var shipping = '{{ order.shipping }}'
 		
